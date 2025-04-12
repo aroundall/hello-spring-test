@@ -1,13 +1,13 @@
-package org.amuji.hello_spring_test;
+package org.amuji.spring.test;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class HelloSpringTestApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(HelloSpringTestApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 }
