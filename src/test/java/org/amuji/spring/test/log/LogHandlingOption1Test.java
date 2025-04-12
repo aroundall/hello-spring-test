@@ -9,6 +9,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
@@ -28,7 +30,10 @@ class LogHandlingOption1Test {
                 .expectStatus().is2xxSuccessful()
                 .expectBody(LogHandlingResult.class).value(result -> {
                     assertThat(result.getResult()).isEqualTo("Done");
-                    assertThat(logCaptor.logs()).contains("Received the request to write a log");
+                    List<String> logs = logCaptor.logs();
+                    assertThat(logs).contains("Received the request to write a log");
+                    assertThat(logs).contains("Do something");
+
                 });
     }
 
