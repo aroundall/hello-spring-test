@@ -2,6 +2,7 @@ package org.amuji.spring.test.log;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -12,9 +13,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class LogHandlingTest extends LogCaptureTest {
+class LogHandlingOption1Test {
     @Autowired
     private WebTestClient client;
+
+    @RegisterExtension
+    static LogCaptureExtension logCaptor = new LogCaptureExtension();
 
     @Test
     public void the_log_should_be_captured() {
@@ -24,7 +28,7 @@ class LogHandlingTest extends LogCaptureTest {
                 .expectStatus().is2xxSuccessful()
                 .expectBody(LogHandlingResult.class).value(result -> {
                     assertThat(result.getResult()).isEqualTo("Done");
-                    assertThat(logs()).contains("Received the request to write a log");
+                    assertThat(logCaptor.logs()).contains("Received the request to write a log");
                 });
     }
 
