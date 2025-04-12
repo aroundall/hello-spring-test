@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class Processor {
     public void process() {
-        log.warn("Do something");
+        log.warn("Do something...");
     }
 }

@@ -32,8 +32,7 @@ class LogHandlingOption1Test {
                     assertThat(result.getResult()).isEqualTo("Done");
                     List<String> logs = logCaptor.logs();
                     assertThat(logs).contains("Received the request to write a log");
-                    assertThat(logs).contains("Do something");
-
+                    assertThat(logs).anyMatch(log -> log.contains("something"));
                 });
     }
 
